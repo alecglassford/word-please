@@ -1,7 +1,66 @@
-<h1>Hello {{name}}!</h1>
+<main>
+  <input type="text" placeholder="type 👏🏿 your 👏🏽 pattern 👏🏻 here" bind:value="pattern" >
+  <details open>
+    <summary>How to do</summary>
+    <p>Enter an English word you want to match! Use a <kbd>*</kbd> to represent any number of arbitrary letters (including 0), or use a number to represent exactly that many letters. Try this: <button on:click="demo()">{{demoPattern}}</button></p>
+  </details>
 
-<style>
-	h1 {
-		color: purple;
-	}
-</style>
+  <section>
+    {{#each results as result}}
+      <div>{{result}}</div>
+    {{/each}}
+  </section>
+</main>
+
+<script>
+  const demoChoices = [
+    'w3d*',
+    'c8t',
+    'tr1l*',
+  ];
+  const chooseDemo = function chooseDemoFunc() {
+    const demoIndex = Math.floor(Math.random() * demoChoices.length);
+    return demoChoices[demoIndex];
+  };
+
+  export default {
+    data() {
+      return {
+        words: [],
+        pattern: '',
+        demoPattern: chooseDemo(),
+        results: [],
+      };
+    },
+    oncreate() {
+      fetch('https://unpkg.com/word-list@2.0.0/words.txt')
+        .then(res => res.text())
+        .then((wordsStr) => {
+          const words = wordsStr.split('\n');
+          this.set({ words });
+        });
+    },
+    methods: {
+      demo() {
+        const demoPattern = this.get('demoPattern');
+        this.set({ pattern: demoPattern });
+
+        let newDemo;
+        do {
+          newDemo = chooseDemo();
+        } while (newDemo === demoPattern);
+        this.set({ demoPattern: newDemo });
+      },
+    },
+    computed: {
+      results(pattern, words) {
+        const expandedPattern = pattern
+          .replace(/\*/g, '.*')
+          .replace(/\d+/g, '.{$&}');
+        const regex = new RegExp(`^${expandedPattern}$`, 'i');
+        const filtered = words.filter(w => regex.test(w));
+        return filtered.slice(0, 1000); // Keep it snappy!
+      },
+    },
+  };
+</script>
