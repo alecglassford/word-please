@@ -1,0 +1,44 @@
+{
+  "name": "word-please",
+  "version": "0.0.0",
+  "private": true,
+  "description": "🗣 It helps you find a word that sounds a way!",
+  "keywords": [
+    "words",
+    "language",
+    "sound",
+    "svelte",
+    "simple",
+    "tiny",
+    "web app"
+  ],
+  "homepage": "https://github.com/alecglassford/word-please#readme",
+  "bugs": {
+    "url": "https://github.com/alecglassford/word-please/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alecglassford/word-please.git"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Alec Glassford",
+    "email": "glassford@cs.stanford.edu",
+    "url": "https://alecglassford.com"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "serve public & rollup -c -w",
+    "start": "serve public"
+  },
+  "devDependencies": {
+    "rollup": "^0.57.1",
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "rollup-plugin-svelte": "^4.0.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "serve": "^6.5.1",
+    "svelte": "^1.56.1"
+  }
+}
