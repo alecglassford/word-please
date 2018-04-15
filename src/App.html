@@ -1,16 +1,22 @@
-<main>
-  <input type="text" placeholder="type 👏🏿 your 👏🏽 pattern 👏🏻 here" bind:value="pattern" >
-  <details open>
-    <summary>How to do</summary>
-    <p>Enter an English word you want to match! Use a <kbd>*</kbd> to represent any number of arbitrary letters (including 0), or use a number to represent exactly that many letters. Try this: <button on:click="demo()">{{demoPattern}}</button></p>
-  </details>
+<details id="how-to" open>
+  <summary>How?</summary>
+  Enter a pattern of letters and symbols to find matching English words! Use a <kbd>*</kbd> to represent any number of arbitrary letters (including 0), or use a number to represent exactly that many letters. Try this: <button on:click="demo()">{{demoPattern}}</button>
+</details>
+<input type="text" placeholder="type 👏🏿 your 👏🏽 pattern 👏🏻 here"
+  aria-label="Enter a pattern to search for matching words." aria-describedby="how-to" aria-controls="results"
+  bind:value="pattern" >
 
-  <section>
+<section id="results" aria-live="polite">
+  {{#if pattern.length > 0 && words.length === 0 }}
+    Loading word list …
+  {{elseif pattern.length > 0 && results.length === 0}}
+    No words match {{pattern}}.
+  {{else}}
     {{#each results as result}}
       <div>{{result}}</div>
     {{/each}}
-  </section>
-</main>
+  {{/if}}
+</section>
 
 <script>
   const demoChoices = [

@@ -9,11 +9,17 @@ body {
   justify-content: space-between;
 }
 
+a, button {
+  color: blue;
+}
+
 header {
   margin-top: 1em;
 }
 
 main {
+  margin: 1em 0;
+  min-height: 0; /* Firefox fix??? https://stackoverflow.com/questions/34144972/flexbox-avoid-child-with-longer-height-than-parent-column-direction */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -28,7 +34,7 @@ input {
 button {
   border: none;
   background-color: transparent;
-  color: skyblue;
+  padding: 0;
   cursor: pointer;
   transition: color 1s ease;
 }
@@ -53,5 +59,5 @@ section div {
 
 footer {
   margin-bottom: 1em;
-  font-size: 0.5em;
+  font-size: 0.8em;
 }
