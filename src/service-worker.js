@@ -23,6 +23,7 @@ self.addEventListener('activate', (ev) => { // eslint-disable-line no-restricted
 });
 
 self.addEventListener('fetch', (ev) => { // eslint-disable-line no-restricted-globals
+  if (!ev.request.url.startsWith('https')) return;
   ev.respondWith(caches.match(ev.request)
     .then(res => res || fetch(ev.request)));
 });
