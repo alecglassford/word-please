@@ -50,7 +50,7 @@ export default [
     input: 'src/load-words.js',
     output: {
       sourcemap: true,
-      format: 'iife',
+      format: 'es',
       file: 'public/load-words.js',
     },
     plugins: [
@@ -62,7 +62,7 @@ export default [
     input: 'src/service-worker.js',
     output: {
       sourcemap: true,
-      format: 'iife',
+      format: 'es',
       file: 'public/service-worker.js',
     },
     plugins: [
