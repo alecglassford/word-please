@@ -58,4 +58,16 @@ export default [
       production && uglify(),
     ],
   },
+  {
+    input: 'src/service-worker.js',
+    output: {
+      sourcemap: true,
+      format: 'iife',
+      file: 'public/service-worker.js',
+    },
+    plugins: [
+      production && buble({ exclude: 'node_modules/**' }),
+      production && uglify(),
+    ],
+  },
 ];
