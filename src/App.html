@@ -46,12 +46,10 @@
       };
     },
     oncreate() {
-      fetch('https://unpkg.com/word-list@2.0.0/words.txt')
-        .then(res => res.text())
-        .then((wordsStr) => {
-          const words = wordsStr.split('\n');
-          this.set({ words });
-        });
+      const wordsWorker = new Worker('load-words.js');
+      wordsWorker.addEventListener('message', (ev) => {
+        this.set({ words: ev.data });
+      });
     },
     methods: {
       demo() {
