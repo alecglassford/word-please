@@ -83,7 +83,7 @@ export default [
         processor: css => purifycss(['src/*.html'], css, { minify: production }),
         output(styles) {
           exec('node prerender.js', {
-            env: { PRERENDER_CSS_STRING: styles },
+            env: Object.assign({ PRERENDER_CSS_STRING: styles }, process.env),
           });
         },
       }),
