@@ -26,7 +26,6 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: (css) => {
-          exec('node prerender.js'); // saddest hack :(
           css.write('public/bundle.css');
         },
 
@@ -82,7 +81,11 @@ export default [
     plugins: [
       sass({
         processor: css => purifycss(['src/*.html'], css, { minify: production }),
-        output: 'public/global.css',
+        output(styles) {
+          exec('node prerender.js', {
+            env: { PRERENDER_CSS_STRING: styles },
+          });
+        },
       }),
     ],
   },
