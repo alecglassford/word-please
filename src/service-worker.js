@@ -1,8 +1,7 @@
 /* eslint-env serviceworker */
 
 const CACHE_NAME = 'wordplease1';
-const URLS = ['/', '/bundle.js', '/load-words.js', 'global.css', 'favicon.ico',
-  'https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap-reboot.min.css',
+const URLS = ['/', '/bundle.js', '/load-words.js', 'favicon.ico',
   'https://unpkg.com/word-list@2.0.0/words.txt'];
 
 self.addEventListener('install', (ev) => { // eslint-disable-line no-restricted-globals

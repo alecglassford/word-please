@@ -1,12 +1,10 @@
 import { exec } from 'child_process';
 
-import svelte from 'rollup-plugin-svelte';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify';
-import sass from 'rollup-plugin-sass';
 import purifycss from 'purify-css';
+import buble from 'rollup-plugin-buble';
+import sass from 'rollup-plugin-sass';
+import svelte from 'rollup-plugin-svelte';
+import uglify from 'rollup-plugin-uglify';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -25,17 +23,6 @@ export default [
         css: false,
         hydratable: true,
       }),
-
-      // If you have external dependencies installed from
-      // npm, you'll most likely need these plugins. In
-      // some cases you'll need additional configuration —
-      // consult the documentation for details:
-      // https://github.com/rollup/rollup-plugin-commonjs
-      resolve(),
-      commonjs(),
-
-      // If we're building for production (npm run build
-      // instead of npm run dev), transpile and minify
       production && buble({ exclude: 'node_modules/**' }),
       production && uglify(),
     ],
@@ -64,7 +51,7 @@ export default [
       production && uglify(),
     ],
   },
-  { // Bundle main CSS
+  {
     input: 'src/main.scss',
     output: { format: 'es', file: '/dev/null' }, // This doesn't matter
     plugins: [
