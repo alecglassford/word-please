@@ -4,3 +4,4 @@ public/bundle.*
 public/load-words.*
 public/service-worker*
 public/index.html
+public/global.css
