@@ -1,3 +1,5 @@
+import { exec } from 'child_process';
+
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -22,6 +24,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: (css) => {
+          exec('node prerender.js'); // saddest hack :(
           css.write('public/bundle.css');
         },
 
@@ -30,6 +33,7 @@ export default [
 
         // this results in smaller CSS files
         cascade: false,
+        hydratable: true,
       }),
 
       // If you have external dependencies installed from

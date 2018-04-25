@@ -3,3 +3,4 @@ node_modules
 public/bundle.*
 public/load-words.*
 public/service-worker*
+public/index.html
