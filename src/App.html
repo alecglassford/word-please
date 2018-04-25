@@ -1,6 +1,6 @@
 <details id="how-to" open>
   <summary>How?</summary>
-  Enter a pattern of letters and symbols to find matching English words! Use a <kbd>*</kbd> to represent any number of arbitrary letters (including 0), or use a number to represent exactly that many letters. Try this: <button on:click="demo()">{{demoPattern}}</button>
+  Enter a pattern of letters and symbols to find matching English words! Use a <kbd>*</kbd> to represent any number of arbitrary letters (including 0), or use a number to represent exactly that many letters. Try this: <button on:click="demo()">{demoPattern}</button>
 </details>
 <input type="text" placeholder="type 👏🏿 your 👏🏽 pattern 👏🏻 here"
   aria-label="Enter a pattern to search for matching words." aria-describedby="how-to" aria-controls="results"
@@ -8,15 +8,15 @@
 
 <section id="results" aria-live="polite">
   <noscript>You need to enable JavaScript to use Word Please.</noscript>
-  {{#if pattern.length > 0 && words.length === 0 }}
+  {#if pattern.length > 0 && words.length === 0 }
     Loading word list …
-  {{elseif pattern.length > 0 && results.length === 0}}
-    No words match {{pattern}}.
-  {{else}}
-    {{#each results as result}}
-      <div>{{result}}</div>
-    {{/each}}
-  {{/if}}
+  {:elseif pattern.length > 0 && results.length === 0}
+    No words match {pattern}.
+  {:else}
+    {#each results as result}
+      <div>{result}</div>
+    {/each}
+  {/if}
 </section>
 
 <script>
@@ -55,7 +55,7 @@
     },
     methods: {
       demo() {
-        const demoPattern = this.get('demoPattern');
+        const { demoPattern } = this.get();
         this.set({ pattern: demoPattern });
 
         let newDemo;
@@ -66,7 +66,7 @@
       },
     },
     computed: {
-      results(pattern, words) {
+      results({ pattern, words }) {
         const expandedPattern = pattern
           .replace(/\*/g, '.*')
           .replace(/\d+/g, '.{$&}');
