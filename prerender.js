@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-require('svelte/ssr/register');
+require('svelte/ssr/register'); // eslint-disable-line
 
 const App = require('./src/App.html');
 
