@@ -4,7 +4,7 @@ import purifycss from 'purify-css';
 import buble from 'rollup-plugin-buble';
 import sass from 'rollup-plugin-sass';
 import svelte from 'rollup-plugin-svelte';
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -23,7 +23,7 @@ export default [
         css: false,
         hydratable: true,
       }),
-      production && buble({ exclude: 'node_modules/**' }),
+      production && buble(),
       production && uglify(),
     ],
   },
@@ -35,7 +35,7 @@ export default [
       file: 'public/load-words.js',
     },
     plugins: [
-      production && buble({ exclude: 'node_modules/**' }),
+      production && buble(),
       production && uglify(),
     ],
   },
